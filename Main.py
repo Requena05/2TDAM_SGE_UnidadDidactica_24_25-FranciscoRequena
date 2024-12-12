@@ -48,3 +48,40 @@ def sorteo_navidad(lista_nombre, lista_premios):
     return lista_resultado
 
 print(sorteo_navidad(lista_nombre,lista_premios))
+'''Crea una función llamada cuenta_regresiva que reciba un número n y haga una
+cuenta regresiva desde ese número hasta 1. Por cada número, imprime "�����" si es
+divisible por 3, "�������" si es divisible por 5, y "����" si es divisible por ambos.'''
+
+print("5. Cuenta regresiva de Año Nuevo")
+def cuenta_regresiva(numero):
+
+    for n in range(numero,0,-1):
+        if (n%3 ==0):
+            print(n,"🎡")
+        if(n%5 == 0 ):
+            print(n,"🎄")
+        if(n%3 ==0 and n%5==0):
+            print(n,"🎁")
+
+cuenta_regresiva(12)
+'''Escribe una función llamada sec_natal que reciba una lista de tuplas con el nombre de
+una persona y su edad, y devuelva una lista con el nombre de las personas mayores de
+edad (18 años o más). La lista debe estar ordenada de forma alfabética'''
+
+print("6. Secuencia de Navidad")
+
+def sec_natal( lista: list):
+
+    lista_mayores: list = []
+
+    for datos in lista:
+        if datos[1]>17:
+           lista_mayores.append(datos[0])
+
+    lista_mayores.sort()
+
+    print(lista_mayores)
+
+
+
+sec_natal([("paco",12),("Jose",23),("Pedro",55),("Victor",18)])
