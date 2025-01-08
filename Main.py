@@ -85,3 +85,63 @@ def sec_natal( lista: list):
 
 
 sec_natal([("paco",12),("Jose",23),("Pedro",55),("Victor",18)])
+
+'''7. Resolución de Sudoku (sin usar bibliotecas externas)
+Crea una función llamada resolver_sudoku que reciba una lista de listas representando
+un tablero de Sudoku incompleto, con ceros (0) representando las casillas vacías. La
+función debe intentar resolver el Sudoku, devolviendo el tablero resuelto. Si no es
+posible resolver el Sudoku con los valores proporcionados, la función debe devolver
+None. El Sudoku debe respetar las reglas:
+1. Cada fila debe contener los números del 1 al 9 sin repetirse.
+2. Cada columna debe contener los números del 1 al 9 sin repetirse.
+3. Cada una de las 9 subcuadrículas de 3x3 debe contener los números del 1 al 9
+sin repetirse.'''
+
+
+def resolver_sudoku(tablero):
+    def es_valido(num, fila, col):
+        for columna in range(9):
+            if tablero[fila][columna] == num:
+                return False
+        for filas in range(9):
+            if tablero[filas][col] == num:
+                return False
+        inicio_fila = (fila // 3) * 3
+        inicio_col = (col // 3) * 3
+        for r in range(inicio_fila, inicio_fila + 3):
+            for c in range(inicio_col, inicio_col + 3):
+                if tablero[r][c] == num:
+                    return False
+        return True
+    def resolver():
+        for fila in range(9):
+            for col in range(9):
+                if tablero[fila][col] == 0:
+                    for num in range(1, 10):
+                        if es_valido(num, fila, col):
+                            tablero[fila][col] = num
+                            if resolver():
+                                return True
+                            tablero[fila][col] = 0
+                    return False
+        return True
+    if resolver():
+        tablero_resuelto=tablero
+        return print("\n",tablero_resuelto)
+    else:
+        return None
+
+tablero_incompleto=[
+    [5, 3, 4, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+
+resolver_sudoku(tablero_incompleto)
+
